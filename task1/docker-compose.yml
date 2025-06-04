@@ -2,4 +2,14 @@ version: '3.8'
 
 services:
   jenkins:
-    image: jenkins/jen
+    image: jenkins/jenkins:lts #jenkins docker image
+    ports:
+      - "8080:8080"    #port mapping--->jenkins web ui runs on port 8080 and we are mapping host machine port 8080 to container port 8080
+    volumes:
+      - jenkins_home:/var/jenkins_home #for jenkins config persistence.
+      - /var/run/docker.sock:/var/run/docker.sock #to mount the host's docker socket into jenkins container. so that  jenkins run docker commands can talk to docker daemon 
+    user: root #to give jenkins the permission to run docker commands via the mounted docker socket
+
+volumes:
+  jenkins_home:
+  # just a named volume. settings is default 
