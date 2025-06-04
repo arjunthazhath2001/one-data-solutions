@@ -19,5 +19,6 @@ spec:
       containers:
         - name: flask-k8s-container
           image: flask-k8s-app
+          imagePullPolicy: Never #so that k8s pulls the image from local machine instead of default docker registry
           ports:
             - containerPort: 5000 
