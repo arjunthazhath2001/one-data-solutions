@@ -18,6 +18,14 @@ pipeline {
             }
         }
 
+        stage('Clean Old Containers') {
+            steps {
+                script {
+                    sh 'docker ps -q --filter "publish=5000" | xargs -r docker rm -f'
+                }
+            }
+        }
+
         stage('Run Docker Container'){
             steps{
                 script{
