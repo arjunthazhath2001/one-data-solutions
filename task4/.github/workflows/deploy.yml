@@ -1,0 +1,40 @@
+name: CI/CD to Kind Cluster
+
+on:
+  push:
+    branches: [main]
+  
+
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+      
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+      
+      - name: Build Docker Image
+        run: |
+          docker build -t flask-k8s-app ./task4
+      
+      - name: Load image into kind
+        uses: engineerd/setup-kind@v0.5.0
+      
+      - name: Create Kind Cluster
+        run: kind create cluster --name github-cicd
+
+      - name: Load Docker Image into Kind Cluster
+        run: kind load docker-image flask-k8s-app --name github-cicd
+      
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f ./task4/k8s
+      
+      - name: Final Info
+        run: |
+          echo "✅ Deployment applied to your Kind cluster."
+          echo "⚠️  Run this locally:"
+          echo "kubectl port-forward service/flask-k8s-service 5001:80"
