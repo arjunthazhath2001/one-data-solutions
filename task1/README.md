@@ -2,7 +2,7 @@
 
 ### 🧱 Step 1: Created Jenkins Docker Setup
 
-We started by writing a `Dockerfile.jenkins` to run Jenkins locally using Docker. This image was based on the official Jenkins LTS and included Docker CLI tools so Jenkins could run Docker commands inside the container.
+I started by writing a `Dockerfile.jenkins` to run Jenkins locally using Docker. This image was based on the official Jenkins LTS and included Docker CLI tools so Jenkins could run Docker commands inside the container.
 
 ```dockerfile
 FROM jenkins/jenkins:lts
@@ -20,7 +20,7 @@ This allowed Jenkins (running inside a container) to communicate with the **host
 
 ### ⚙️ Step 2: Wrote a `docker-compose.yml` to Run Jenkins Easily
 
-We added a `docker-compose.yml`:
+I added a `docker-compose.yml`:
 
 ```yaml
 version: '3.8'
@@ -49,7 +49,7 @@ volumes:
 
 ### 🧩 Step 3: Jenkins GUI Setup
 
-After running `docker-compose up`, we:
+After running `docker-compose up`, I:
 
 * Logged in at `http://localhost:8080`
 * Installed **recommended plugins** and the **Docker plugin**
@@ -59,7 +59,7 @@ After running `docker-compose up`, we:
 
 ### 🧪 Step 4: Pipeline Stages via `Jenkinsfile`
 
-Inside our GitHub repo (`task1/Jenkinsfile`), we defined stages:
+Inside my GitHub repo (`task1/Jenkinsfile`), I defined the stages:
 
 ```groovy
 pipeline {
@@ -99,7 +99,7 @@ pipeline {
 
 ---
 
-### 🐳 Why We Needed `Dockerfile.jenkins`?
+### 🐳 Why I Needed `Dockerfile.jenkins`
 
 Initially, Jenkins builds failed with:
 
@@ -107,10 +107,10 @@ Initially, Jenkins builds failed with:
 docker: command not found
 ```
 
-We realized:
+I realized:
 
-* **Jenkins container didn’t include Docker CLI**
-* So we created `Dockerfile.jenkins` to add Docker inside Jenkins
+* The **Jenkins container didn’t include the Docker CLI**
+* So I created `Dockerfile.jenkins` to add Docker inside the Jenkins container
 
 > This was crucial: **Jenkins needs Docker CLI to talk to the host Docker daemon via mounted socket.**
 
@@ -118,7 +118,7 @@ We realized:
 
 ### 🔁 Clean Deployment Strategy
 
-We added this to avoid *“port already in use”* errors on repeated builds:
+I added this to avoid *“port already in use”* errors on repeated builds:
 
 ```groovy
 stage('Clean Old Containers') {
@@ -136,8 +136,8 @@ This ensured old containers on port 5000 were **cleaned up before running the ne
 
 ### 🚀 Final Flow
 
-1. **Push code to GitHub**
-2. Hit **“Build Now”** in Jenkins
+1. I push code to GitHub
+2. I hit **“Build Now”** in Jenkins
 3. Jenkins:
 
    * Clones repo
@@ -152,7 +152,7 @@ This ensured old containers on port 5000 were **cleaned up before running the ne
 ### 🧠 Key Learnings
 
 * Docker inside Docker: **Jenkins runs inside Docker, but can use host Docker via socket bind**
-* `Dockerfile.jenkins`: Used to install Docker CLI inside Jenkins container. only then jenkins can run docker commands
+* `Dockerfile.jenkins`: Used to install Docker CLI inside Jenkins container. Only then Jenkins can run Docker commands
 * Container Cleanup: Necessary to prevent **“port already in use”** errors
-* CI Flow: We now have a working CI pipeline that rebuilds and runs your app every time you update GitHub.
+* CI Flow: I now have a working CI pipeline that rebuilds and runs my app every time I update GitHub.
 
