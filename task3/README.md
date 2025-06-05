@@ -79,7 +79,5 @@ task3/
 # Port-forward to test app locally
 kubectl port-forward service/demo-service 8081:80
 ````
-
+and visit localhost:8081
 ---
-
-> ✔️ **Task Completed Successfully**
