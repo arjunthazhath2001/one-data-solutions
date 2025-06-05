@@ -35,23 +35,5 @@ pipeline {
         }
     }
 
-    post {
-    success {
-        emailext(
-            to: 'arjunta32@gmail.com',
-            subject: 'Build Successful',
-            body: "Good news! The build was successful.\nCheck it at ${env.BUILD_URL}",
-            mimeType: 'text/plain'
-        )
-    }
-    failure {
-        emailext(
-            to: 'arjunta32@gmail.com',
-            subject: 'Build Failed',
-            body: "Unfortunately, the build failed.\nCheck details at ${env.BUILD_URL}",
-            mimeType: 'text/plain'
-        )
-    }
-}
 
 }
