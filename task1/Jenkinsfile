@@ -2,16 +2,16 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone'){
-            steps{
+        stage('Clone') {
+            steps {
                 git branch: 'main', url: 'https://github.com/arjunthazhath2001/one-data-solutions.git'
             }
         }
 
-        stage('Build Docker Image'){
-            steps{
-                dir('task1'){
-                    script{
+        stage('Build Docker Image') {
+            steps {
+                dir('task1') {
+                    script {
                         dockerImage = docker.build("flask-task1-app")
                     }
                 }
@@ -26,12 +26,29 @@ pipeline {
             }
         }
 
-        stage('Run Docker Container'){
-            steps{
-                script{
+        stage('Run Docker Container') {
+            steps {
+                script {
                     dockerImage.run("-p 5000:5000")
                 }
             }
+        }
+    }
+
+    post {
+        success {
+            emailext(
+                to: 'arjunta32@gmail.com',
+                subject: 'Build Successful: ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                body: "Good news! The build was successful.\nCheck it at ${env.BUILD_URL}"
+            )
+        }
+        failure {
+            emailext(
+                to: 'arjunta32@gmail.com',
+                subject: 'Build Failed: ${env.JOB_NAME} #${env.BUILD_NUMBER}',
+                body: "Unfortunately, the build failed.\nCheck details at ${env.BUILD_URL}"
+            )
         }
     }
 }

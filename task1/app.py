@@ -3,7 +3,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello():
-    return "Hello All! from Flask in CI/CD pipeline! See u"
+    return "Hello All! from TASK1 in CI/CD pipeline! See u"
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
