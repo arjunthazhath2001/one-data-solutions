@@ -3,6 +3,12 @@ name: Build and Push to Docker hub
 on:
   push:
     branches: [main]
+    paths:
+      - 'task4/app.py'
+      - 'task4/requirements.txt'
+      - 'task4/Dockerfile'
+      - 'task4/k8s/**'
+      - '.github/workflows/deploy.yml'
   
 
 jobs:
