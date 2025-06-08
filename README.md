@@ -2,6 +2,33 @@ Here's a sample **master `README.md`** you can use for your root GitHub reposito
 
 ---
 
+
+VIDEO EXPLANATIONS:
+
+
+TASK 1:
+https://youtu.be/WKW8wWRyz_M
+
+TASK 2:
+https://youtu.be/mE_smmL5FdU
+
+TASK 3:
+https://youtu.be/Gy7R-PgYWr4
+
+TASK 4:
+PART 1: https://youtu.be/vgff5nUI1pQ
+PART 2: https://youtu.be/t2oek92PgZ8
+
+TASK 5: 
+https://youtu.be/X7uW1vr0pq8
+
+TASK 6:
+https://youtu.be/DmAwPvf_y6c
+
+TASK 7:
+https://youtu.be/bor1Ae2lPNE
+
+
 ### 📊 One Data Solutions - Assignment Repository
 
 This repository contains 7 different tasks completed as part of the **OneData Internship Assignment**.
